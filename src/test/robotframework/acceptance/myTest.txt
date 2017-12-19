@@ -1,0 +1,94 @@
+*** Settings ***
+Documentation  Documentation of Testsuite goes here ;-)
+
+Resource  globalKeywords.txt
+
+#Suite Setup  Init Environment
+#Suite Teardown  Close Browser
+
+*** Settings ***
+#Test Teardown     Close All Browsers
+Library           Selenium2Library
+Library           OperatingSystem
+
+*** Variables ***
+${search input}     id=lst-ib
+${url}  http://10.77.141.17:8080/MicroStrategy/servlet/mstrWeb?Server=RTGSRV1MS01-T&Project=MicroStrategy+Tutorial&Port=0&evt=2048001&src=mstrWeb.2048001&documentID=D952985148C9D60148B6DD9CE85B8D19&currentViewMedia=2&visMode=0
+${DOWNLOAD_DIRECTORY}       C:\\PDF_download
+#${CLASS_NAME}               in
+
+*** Test Cases ***
+
+#Send Shift Tab To Current Element
+#    ${keys}=Evaluate    selenium.webdriver.common.keys.Keys  selenium
+#    ${s2l}=Get Library Instance  Selenium2Library
+#    ${actionchain module}=Evaluate  selenium.webdriver.common.action_chains  selenium
+#    ${action chain}=Call Method  ${actionchain module}  ActionChains  ${s2l._current_browser()}
+#    Call Method  ${action chain}  send_keys  ${keys.TAB}
+#    Call Method  ${action chain}  perform
+    
+Open Start Screen
+#	Open Browser  http://www.google.com  Firefox
+#	Input Text  lst-ib  aaa
+#	Sleep  2s
+#	Send Shift Tab To Current Element
+#	Press Key  CTRL+A
+#	Sleep  2s
+#	Press Key  link=Bilder  \\13
+#	Click Button  Google-Suche
+
+#Scenario: User can download
+#    Create Directory    ${DOWNLOAD_DIRECTORY}
+
+    Open Browser  ${url}  Firefox
+    Page Should Contain  MicroStrategy
+    Input Text  Uid  administrator
+    Input Text  id=Pwd  MTAG2017#
+    Click Button  Anmelden
+	
+#	${count} =  Get Matching Xpath Count  xpath=//*[@id='W22_Sl']/*
+#	Should be equal as numbers  ${count}  4
+
+#	${content} =  Get Element Attribute  xpath=//meta[@name="W148"]@content
+#	Should be equal as strings  ${content}  8.9%
+#	Locator Should Match X Times  xpath=//*[@id='W22_Sl']/*  4
+#	${items} =  Get Selected List Values  xpath=//*[@id='W22_Sl'] 
+#	Length Should Be  ${items}  4
+	
+#    Select From List  xpath=//*[@id='W22_Sl']  Books
+    Select From List  xpath=//*[@id='W22_Sl']  Filme
+#    Sleep  3s
+#    Press Key  id=W144  CTRL+TAB
+    Click Element  css=div.mstrListBlockItemName
+    Click Element  css=div.mstrToolbarList.xPDF.mstrListBlockItem
+    Sleep  5s
+#	Press Key  css=td.r-c14_W112.nw  CONTROL+C
+	Select Window    Title=Cockpit - Cockpit.pdf
+	Sleep  5s
+	Click Element  id=download
+#	Set Selenium Speed  10s
+#	Download PDF    Cockpit.pdf
+#	Sleep  5s
+#	Choose File  id=download  C:\\PDF_download
+#	press key  \\13
+
+#	Select From List  xpath=//*[@id='id_mstr195ListContainer']  2
+#	Click Element  css=div.mstrListBlockItem:nth-child(7)
+#    Select From List  xpath=//*[@id='ListBlockContents_id_mstr195']
+#    Select From List  xpath=//*[@class='mstrListBlockItemName']
+#	Click Element  css=mstrListPulldownCellContent.div.mstrToolbarList.xPDF.mstrListBlockItem
+#	Select From List  xpath=//*[@class='mstrListPulldownCellButton']
+#	Click Element  css=div.mstrListBlockItemName
+#	Click Element  id=download
+	
+#	Click Element  css=div.toolbarButton.download.hiddenMediumView
+#	Click Element  css=div.mstrListBlockItem  title=100%
+#	Click Element  css=div.mstrListBlockContents  '100%'
+	
+#    Click Element  id=tbSave
+#    Click Element  css=div.mstrListPulldownButtonPushed
+#   Open Browser  http://10.77.141.17:8080/MicroStrategy/servlet/mstrWeb?Server=RTGSRV1MS01-T&Project=MicroStrategy+Tutorial&Port=0&evt=2048001&src=mstrWeb.2048001&documentID=D952985148C9D60148B6DD9CE85B8D19&currentViewMedia=2&visMode=0
+#   Click Element  xpath=//*[@class='mstrLargeIconViewItemText'][1]
+    
+#    //*Click Element  xpath=//*[@class='mstr-dskt-icn'][2]
+#   //*Click Element  //*[@title='POC-Test']

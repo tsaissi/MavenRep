@@ -1,0 +1,11 @@
+*** Settings ***
+Documentation  this ressource file contain specific keywords for running
+...            Robotframework and Selenium Lib
+
+Library  Selenium2Library 
+
+
+
+*** Variables ***
+
+*** Keywords ***
